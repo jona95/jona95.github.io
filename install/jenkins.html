@@ -1,0 +1,582 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Jenkins Configuration · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="rook_ceph.html" />
+    
+    
+    <link rel="prev" href="../chapter1/Readme.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../chapter1/Readme.html">
+            
+                <a href="../chapter1/Readme.html">
+            
+                    
+                    Installation
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="jenkins.html">
+            
+                <a href="jenkins.html">
+            
+                    
+                    Jenkins Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="rook_ceph.html">
+            
+                <a href="rook_ceph.html">
+            
+                    
+                    Rook-Deph Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../chapter1/section1.1.html">
+            
+                <a href="../chapter1/section1.1.html">
+            
+                    
+                    Section1.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../rook/rook1.html">
+            
+                <a href="../rook/rook1.html">
+            
+                    
+                    Deploy Rook
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../chapter2/Readme.html">
+            
+                <a href="../chapter2/Readme.html">
+            
+                    
+                    Chapter2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Jenkins Configuration</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="jenkins-configuration">Jenkins Configuration</h1>
+<ul>
+<li><h4 id="jenkins&#x90E8;&#x7F72;&#x91C7;&#x53D6;jenkins-master--jenkins-slave&#x7684;&#x65B9;&#x5F0F;&#x90E8;&#x7F72;&#x5230;kubernetes&#x96C6;&#x7FA4;&#x4E0A;&#x3002;&#x4E00;&#x65E6;&#x5728;-jenkins-&#x4E2D;&#x628A;&#x6784;&#x5EFA;&#x8282;&#x70B9;&#x548C;-job-&#x90FD;&#x5BB9;&#x5668;&#x5316;&#x4E86;&#xFF0C;&#x8FC1;&#x79FB;&#x5DE5;&#x4F5C;&#x5E73;&#x53F0;&#x5C06;&#x53D8;&#x5F97;&#x5341;&#x5206;&#x7B80;&#x5355;&#x6613;&#x884C;&#x3002;&#x5728;-kubernetes-&#x96C6;&#x7FA4;&#x4E2D;&#x7684;-jenkins-&#x4EE3;&#x7406;&#x4E2D;&#x8FD0;&#x884C;&#x6784;&#x5EFA;&#x662F;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5E76;&#x4E14;&#x964D;&#x4F4E;&#x540C;&#x65F6;&#x6784;&#x5EFA;&#x591A;&#x4E2A;&#x4EFB;&#x52A1;&#x65F6;&#x9020;&#x6210;&#x7684;&#x5355;&#x4E2A;jenkins&#x4EE3;&#x7406;&#x8D1F;&#x8F7D;&#x3002;"><em>Jenkins&#x90E8;&#x7F72;&#x91C7;&#x53D6;jenkins master + jenkins slave&#x7684;&#x65B9;&#x5F0F;&#x90E8;&#x7F72;&#x5230;Kubernetes&#x96C6;&#x7FA4;&#x4E0A;&#x3002;&#x4E00;&#x65E6;&#x5728; Jenkins &#x4E2D;&#x628A;&#x6784;&#x5EFA;&#x8282;&#x70B9;&#x548C; job &#x90FD;&#x5BB9;&#x5668;&#x5316;&#x4E86;&#xFF0C;&#x8FC1;&#x79FB;&#x5DE5;&#x4F5C;&#x5E73;&#x53F0;&#x5C06;&#x53D8;&#x5F97;&#x5341;&#x5206;&#x7B80;&#x5355;&#x6613;&#x884C;&#x3002;&#x5728; Kubernetes &#x96C6;&#x7FA4;&#x4E2D;&#x7684; Jenkins &#x4EE3;&#x7406;&#x4E2D;&#x8FD0;&#x884C;&#x6784;&#x5EFA;&#x662F;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5E76;&#x4E14;&#x964D;&#x4F4E;&#x540C;&#x65F6;&#x6784;&#x5EFA;&#x591A;&#x4E2A;&#x4EFB;&#x52A1;&#x65F6;&#x9020;&#x6210;&#x7684;&#x5355;&#x4E2A;jenkins&#x4EE3;&#x7406;&#x8D1F;&#x8F7D;&#x3002;</em></h4>
+</li>
+<li><h4 id="&#x5B9A;&#x5236;&#x90E8;&#x7F72;&#x5230;kubernetes&#x7684;jenkins&#x955C;&#x50CF;">&#x5B9A;&#x5236;&#x90E8;&#x7F72;&#x5230;Kubernetes&#x7684;Jenkins&#x955C;&#x50CF;</h4>
+<ul>
+<li><p>&#x9700;&#x8981;&#x6839;&#x636E;&#x9700;&#x8981;&#x5BF9;Jenkins&#x539F;&#x59CB;&#x955C;&#x50CF;&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#x91CD;&#x5EFA;&#x3002;&#x7531;&#x4E8E;&#x6302;&#x8F7D;&#x5916;&#x90E8;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#x4F1A;&#x6539;&#x53D8;&#x5BB9;&#x5668;&#x91CC;&#x5BF9;&#x5E94;&#x6302;&#x8F7D;&#x76EE;&#x5F55;&#x7684;&#x5C5E;&#x4E3B;&#xFF0C;&#x9020;&#x6210;&#x56E0;&#x6743;&#x9650;&#x4E0D;&#x8DB3;&#x65E0;&#x6CD5;&#x542F;&#x52A8;&#x670D;&#x52A1;&#x3002;&#x672C;&#x9879;&#x76EE;&#x9700;&#x8981;&#x5BF9;&#x6302;&#x8F7D;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#x7684;/var/jenkins_hoem&#x76EE;&#x5F55;&#x8FDB;&#x884C;&#x8D4B;&#x6743;&#xFF0C;&#x5426;&#x5219;&#x6CA1;&#x6709;&#x5199;&#x6743;&#x9650;&#xFF0C;Jenkins&#x670D;&#x52A1;&#x65E0;&#x6CD5;&#x542F;&#x52A8;&#x3002;&#xFF08;&#x5177;&#x4F53;&#x89C1;&#x5370;&#x8C61;&#x7B14;&#x8BB0;docker volume&#x90E8;&#x5206;&#x8BF4;&#x660E;&#xFF09;</p>
+</li>
+<li><p>&#x5236;&#x4F5C;&#x601D;&#x8DEF;&#xFF1A;&#x7F16;&#x5199;Dockerfile&#x5BF9;&#x5B98;&#x65B9;jenkins&#x955C;&#x50CF;&#x542F;&#x52A8;&#x540E;&#x4F7F;&#x7528;root&#x7528;&#x6237;&#x4FEE;&#x6539;/var/jenkins_home&#x76EE;&#x5F55;&#x5C5E;&#x4E3B;&#xFF0C;&#x518D;&#x4F7F;&#x7528;jenkins&#x7528;&#x6237;&#x542F;&#x52A8;jenkins&#x670D;&#x52A1;&#xFF0C;&#x786E;&#x4FDD;&#x4E86;&#x76EE;&#x5F55;&#x6743;&#x9650;&#x6B63;&#x786E;&#x3001;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x6B63;&#x786E;&#x3002;</p>
+</li>
+<li><p><code>FROM jenkinsci/blueocean:1.14.0</code></p>
+<p><code>USER root</code></p>
+<p><code>ENV GOSU_VERSION 1.11</code></p>
+<p><code>RUN set -eux; \</code></p>
+<p>&#x200B;        <code>\</code></p>
+<p>&#x200B;        <code>apk add --no-cache --virtual .gosu-deps \</code></p>
+<p>&#x200B;                <code>dpkg \</code></p>
+<p>&#x200B;                <code>gnupg \</code></p>
+<p>&#x200B;        <code>; \</code></p>
+<p>&#x200B;        <code>\</code></p>
+<p>&#x200B;        <code>dpkgArch=&quot;$(dpkg --print-architecture | awk -F- &apos;{ print $NF }&apos;)&quot;; \</code></p>
+<p>&#x200B;        <code>wget -O /usr/local/bin/gosu &quot;https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch&quot;; \</code></p>
+<p>&#x200B;        <code>wget -O /usr/local/bin/gosu.asc &quot;https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc&quot;; \</code></p>
+<p>&#x200B;        <code>\</code></p>
+<p><code>\# verify the signature</code></p>
+<p>&#x200B;        <code>export GNUPGHOME=&quot;$(mktemp -d)&quot;; \</code></p>
+<p><code>\# for flaky keyservers, consider https://github.com/tianon/pgp-happy-eyeballs, ala https://github.com/docker-library/php/pull/666</code></p>
+<p>&#x200B;        <code>gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \</code></p>
+<p>&#x200B;        <code>gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \</code></p>
+<p>&#x200B;        <code>command -v gpgconf &amp;&amp; gpgconf --kill all || :; \</code></p>
+<p>&#x200B;        <code>rm -rf &quot;$GNUPGHOME&quot; /usr/local/bin/gosu.asc; \</code></p>
+<p>&#x200B;        <code>\</code></p>
+<p><code>\# clean up fetch dependencies</code></p>
+<p>&#x200B;        <code>apk del --no-network .gosu-deps; \</code></p>
+<p>&#x200B;        <code>\</code></p>
+<p>&#x200B;        <code>chmod +x /usr/local/bin/gosu; \</code></p>
+<p><code>\# verify that the binary works</code></p>
+<p>&#x200B;        <code>gosu --version; \</code></p>
+<p>&#x200B;        <code>gosu nobody true</code></p>
+<p><code>COPY entrypoint.sh ./</code></p>
+<p><code>RUN chmod +x entrypoint.sh</code></p>
+<p><code>ENTRYPOINT [&quot;./entrypoint.sh&quot;]</code></p>
+</li>
+<li><p><u>entrypoint.sh&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;</u>&#xFF1A;</p>
+<p><code>#!/bin/bash -e</code></p>
+<p><code>chown -R 1000:1000 &quot;$JENKINS_HOME&quot;</code></p>
+<p><code>exec gosu jenkins /bin/tini -- /usr/local/bin/jenkins.sh</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h4 id="&#x8BBE;&#x7F6E;jenkins&#x65F6;&#x533A;&#x53D6;&#x503C;&#x6587;&#x4EF6;">&#x8BBE;&#x7F6E;Jenkins&#x65F6;&#x533A;&#x53D6;&#x503C;&#x6587;&#x4EF6;</h4>
+<ul>
+<li><p>jenkins&#x8FD0;&#x884C;&#x7684;&#x83B7;&#x53D6;&#x65F6;&#x95F4;&#x4E0D;&#x662F;&#x4F7F;&#x7528;&#x7CFB;&#x7EDF;&#x7684;/etc/localtime&#x6587;&#x4EF6;&#xFF0C;&#x800C;&#x662F;&#x5355;&#x72EC;&#x7684;/etc/timezone&#x6587;&#x4EF6;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x5355;&#x72EC;&#x8BBE;&#x7F6E;&#x6302;&#x8F7D;&#x3002;&#x6211;&#x4EEC;&#x91C7;&#x53D6;conifgmap&#x7684;&#x65B9;&#x5F0F;&#x8BBE;&#x7F6E;&#x548C;&#x6302;&#x8F7D;&#x6B64;&#x6587;&#x4EF6;&#x3002;&#x786E;&#x4FDD;&#x6784;&#x5EFA;&#x65F6;&#x95F4;&#x53D6;&#x503C;&#x662F;&#x6B63;&#x786E;&#x7684;&#x3002;</p>
+</li>
+<li><p><u>timezone&#x7684;yaml&#x6587;&#x4EF6;&#x5982;&#x4E0B;</u>&#xFF1A;</p>
+<p><code>apiVersion: v1</code></p>
+<p><code>data:</code></p>
+<p>  <code>timeZone: Asia/Shanghai</code></p>
+<p><code>kind: ConfigMap</code></p>
+<p><code>metadata:</code></p>
+<p>  <code>labels:</code></p>
+<p>&#x200B;    <code>cattle.io/creator: norman</code></p>
+<p>  <code>name: timezone</code></p>
+<p>  <code>namespace: cicd</code></p>
+<p>  <code>selfLink: /api/v1/namespaces/cicd/configmaps/timezone</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h4 id="&#x8BBE;&#x7F6E;varjenkinshome-&#x76EE;&#x5F55;&#x6302;&#x8F7D;&#x5230;&#x7F51;&#x7EDC;&#x5B58;&#x50A8;&#xFF0C;&#x505A;&#x5230;&#x6570;&#x636E;&#x6301;&#x4E45;&#x5316;">&#x8BBE;&#x7F6E;/var/jenkins_home/ &#x76EE;&#x5F55;&#x6302;&#x8F7D;&#x5230;&#x7F51;&#x7EDC;&#x5B58;&#x50A8;&#xFF0C;&#x505A;&#x5230;&#x6570;&#x636E;&#x6301;&#x4E45;&#x5316;</h4>
+<ul>
+<li>&#x5728;&#x96C6;&#x7FA4;&#x5B89;&#x88C5;&#x4E86;Rook-Ceph&#x5206;&#x5E03;&#x5F0F;&#x5B58;&#x50A8;&#xFF0C;&#x4F9B;pod&#x4F7F;&#x7528;&#x6302;&#x8F7D;&#x6301;&#x4E45;&#x5316;&#x6570;&#x636E;&#xFF0C;&#x505A;&#x5230;&#x652F;&#x6301;&#x6709;&#x72B6;&#x6001;&#x5E94;&#x7528;&#x3002;</li>
+<li>jenkins&#x7684;home&#x76EE;&#x5F55;&#x5FC5;&#x987B;&#x8981;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#xFF0C;&#x4EE5;&#x4FBF;&#x5728;jenkins master&#x7684;pod&#x53EF;&#x4EE5;&#x8C03;&#x5EA6;&#x5230;Kubernetes&#x96C6;&#x7FA4;&#x91CC;&#x7684;&#x4EFB;&#x610F;node&#x4E0A;&#xFF0C;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x91CD;&#x65B0;&#x5EFA;&#x7ACB;&#x65F6;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x670D;&#x52A1;&#x548C;&#x6570;&#x636E;&#x3002;</li>
+<li>&#x672C;&#x9879;&#x76EE;&#x4F7F;&#x7528;Ceph&#x7684;rbd&#x5757;&#x5B58;&#x50A8;&#x6302;&#x8F7D;home&#x76EE;&#x5F55;</li>
+</ul>
+</li>
+<li><h4 id="&#x8BBE;&#x7F6E;jenkins&#x96C6;&#x6210;kubernetes&#x51ED;&#x8BC1;">&#x8BBE;&#x7F6E;Jenkins&#x96C6;&#x6210;Kubernetes&#x51ED;&#x8BC1;</h4>
+<ul>
+<li><p>&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1; Jenkins &#x80FD;&#x591F;&#x8BBF;&#x95EE; K8s &#x96C6;&#x7FA4;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x521B;&#x5EFA;Kubernetes&#x51ED;&#x8BC1;&#x3002;</p>
+</li>
+<li><p>&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x51ED;&#x8BC1;&#x3002;</p>
+</li>
+<li><p><u>&#x7B2C;&#x4E00;&#x79CD;&#xFF0C;&#x6309;&#x7167;Kubernetes&#x7684;ServiceAccount&#x5EFA;&#x7ACB;&#x51ED;&#x8BC1;</u>&#x3002;yaml&#x6587;&#x4EF6;&#x5982;&#x4E0B;&#xFF08;jenkins-rbac.yaml&#xFF09;&#xFF1A;</p>
+<p><code>apiVersion: v1</code>
+<code>kind: ServiceAccount</code>
+<code>metadata:</code>
+  <code>labels:</code></p>
+<pre><code>`k8s-app: jenkins`
+</code></pre><p>  <code>name: jenkins-ci</code>
+  <code>namespace: cicd</code></p>
+<p><code>---</code></p>
+<p><code>apiVersion: rbac.authorization.k8s.io/v1beta1</code>
+<code>kind: ClusterRoleBinding</code>
+<code>metadata:</code>
+  <code>name: jenkins-ci</code>
+  <code>labels:</code></p>
+<pre><code>`k8s-app: jenkins`
+</code></pre><p><code>roleRef:</code>
+  <code>apiGroup: rbac.authorization.k8s.io</code>
+  <code>kind: ClusterRole</code>
+  <code>name: cluster-admin</code>
+<code>subjects:</code></p>
+<p><code>- kind: ServiceAccount</code></p>
+<pre><code>`name: jenkins-ci`
+`namespace: cicd`
+</code></pre></li>
+<li><p><u>&#x7B2C;&#x4E8C;&#x79CD;&#x8BBE;&#x7F6E;&#x65B9;&#x5F0F;&#xFF08;&#x672C;&#x4EBA;&#x672A;&#x5B9E;&#x9645;&#x9A8C;&#x8BC1;&#xFF09;</u>&#xFF1A;</p>
+<ol>
+<li><p>&#x8FDB;&#x5165; Jenkins &#x7684; UI &#x754C;&#x9762;&#xFF0C;&#x70B9;&#x51FB;&#x5DE6;&#x8FB9;&#x5BFC;&#x822A;&#x680F;&#x91CC;&#x7684;&#x51ED;&#x636E;&#x94FE;&#x63A5;</p>
+</li>
+<li><p>&#x70B9;&#x51FB; Stores scoped to Jenkins &#x5217;&#x8868;&#x4E0B; global &#x4E2D;&#x7684; Add credentials (&#x5C06;&#x9F20;&#x6807;&#x60AC;&#x505C;&#x5728;&#x94FE;&#x63A5;&#x65C1;&#x8FB9;&#x5373;&#x53EF;&#x770B;&#x5230;&#x7BAD;&#x5934;)</p>
+</li>
+<li><p>&#x70B9;&#x51FB;&#x6DFB;&#x52A0;&#x51ED;&#x8BC1;</p>
+</li>
+<li><p>&#x6DFB;&#x52A0;&#x7C7B;&#x578B; Kubernetes Service Account</p>
+</li>
+<li><p>&#x5C06;&#x8303;&#x56F4;&#x8BBE;&#x7F6E;&#x4E3A;&#x5168;&#x5C40;</p>
+</li>
+<li><p>&#x70B9;&#x51FB; OK &#x6309;&#x94AE;</p>
+</li>
+</ol>
+<p>&#x8FD9;&#x6837; Jenkins &#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x51ED;&#x636E;&#x53BB;&#x8BBF;&#x95EE; K8s &#x7684;&#x8D44;&#x6E90;&#x3002;</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h4 id="jenkins-&#x670D;&#x52A1;&#x90E8;&#x7F72;pod&#x7684;yaml&#x6587;&#x4EF6;&#x5982;&#x4E0B;&#xFF1A;">Jenkins &#x670D;&#x52A1;&#x90E8;&#x7F72;pod&#x7684;yaml&#x6587;&#x4EF6;&#x5982;&#x4E0B;&#xFF1A;</h4>
+<ul>
+<li><a href="install/jenkins_yaml.md">jenkins.yaml</a> </li>
+</ul>
+</li>
+<li><h4 id="&#x5B89;&#x88C5;&#x672C;&#x9879;&#x76EE;&#x4F7F;&#x7528;&#x7684;jenkins-plugins&#x5305;">&#x5B89;&#x88C5;&#x672C;&#x9879;&#x76EE;&#x4F7F;&#x7528;&#x7684;Jenkins plugins&#x5305;</h4>
+<ul>
+<li><p>Jenkins&#x90E8;&#x7F72;&#x662F;&#x5728;&#x5185;&#x7F51;&#x90E8;&#x7F72;&#xFF0C;&#x65E0;&#x6CD5;&#x8FDE;&#x63A5;&#x4E92;&#x8054;&#x7F51;&#xFF0C;&#x56E0;&#x6B64;&#x4F7F;&#x7528;&#x7684;jenkins plugins&#x9700;&#x8981;&#x5148;&#x5230;&#x5B98;&#x7F51;&#x4E0B;&#x8F7D;&#x540E;&#x518D;&#x5B89;&#x88C5;&#xFF0C;&#x5E76;&#x4E14;&#xFF0C;&#x7531;&#x4E8E;&#x5404;&#x4E2A;&#x5305;&#x4E4B;&#x95F4;&#x6709;&#x53EF;&#x80FD;&#x6709;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x9700;&#x8981;&#x6309;&#x7167;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x5B89;&#x88C5;&#x3002;&#x76EE;&#x524D;&#x4F7F;&#x7528;&#x7684;&#x63D2;&#x4EF6;&#x5305;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x9879;&#xFF1A;</p>
+<h6 id="jenkins&#x5B89;&#x88C5;&#x7684;&#x63D2;&#x4EF6;&#x548C;&#x987A;&#x5E8F;&#xFF1A;"><u>Jenkins&#x5B89;&#x88C5;&#x7684;&#x63D2;&#x4EF6;&#x548C;&#x987A;&#x5E8F;</u>&#xFF1A;</h6>
+<h6 id="maven&#x96C6;&#x6210;&#x6784;&#x5EFA;&#x6269;&#x5C55;&#x5305;&#xFF08;&#x672C;&#x9879;&#x76EE;&#x672A;&#x4F7F;&#x7528;&#xFF09;">Maven&#x96C6;&#x6210;&#x6784;&#x5EFA;&#x6269;&#x5C55;&#x5305;&#xFF08;&#x672C;&#x9879;&#x76EE;&#x672A;&#x4F7F;&#x7528;&#xFF09;</h6>
+<p>JDK Tool </p>
+<p>Command Agent Launcher </p>
+<p>Javadoc </p>
+<p>bouncycastle API </p>
+<p>Maven Integration</p>
+<h6 id="docker&#x96C6;&#x6210;&#x63D2;&#x4EF6;&#xFF08;&#x672C;&#x9879;&#x76EE;&#x672A;&#x4F7F;&#x7528;&#xFF09;">Docker&#x96C6;&#x6210;&#x63D2;&#x4EF6;&#xFF08;&#x672C;&#x9879;&#x76EE;&#x672A;&#x4F7F;&#x7528;&#xFF09;</h6>
+<p>SSH Slaves Success</p>
+<p>Docker API Success</p>
+<p>Docker Success</p>
+<h6 id="kubernetes-plugin&#x96C6;&#x6210;&#x63D2;&#x4EF6;">Kubernetes plugin&#x96C6;&#x6210;&#x63D2;&#x4EF6;</h6>
+<p>Kubernetes Credentials Success</p>
+<p>Kubernetes Success</p>
+<p>Kubernetes Cli Success</p>
+<h6 id="gitlab&#x63D2;&#x4EF6;">Gitlab&#x63D2;&#x4EF6;</h6>
+<p>GitLab </p>
+<p>Gitlab Authentication </p>
+<p>WMI Windows Agents </p>
+<p>ruby-runtime </p>
+<p>Gitlab Hook </p>
+<h6 id="role&#x63D2;&#x4EF6;role-based-authorization">Role&#x63D2;&#x4EF6;Role-based Authorization</h6>
+<p>Ant </p>
+<p>jQuery </p>
+<p>PAM Authentication </p>
+<p>LDAP </p>
+<p>External Monitor Job Type </p>
+<p>jQuery UI </p>
+<p>Role-based Authorization Strategy </p>
+<h6 id="pipeline-&#x96C6;&#x6210;&#x63D2;&#x4EF6;">Pipeline &#x96C6;&#x6210;&#x63D2;&#x4EF6;</h6>
+<p>Pipeline: REST API </p>
+<p>JavaScript GUI Lib: Handlebars bundle </p>
+<p>JavaScript GUI Lib: Moment.js bundle </p>
+<p>Pipeline: Stage View </p>
+<h6 id="sonarqube&#x63D2;&#x4EF6;">SonarQube&#x63D2;&#x4EF6;</h6>
+<p>Sonargraph Integration </p>
+<p>SonarQube Scanner </p>
+<p>Quality Gates </p>
+<p>Sonargraph </p>
+<h6 id="email&#x6269;&#x5C55;&#x63D2;&#x4EF6;">email&#x6269;&#x5C55;&#x63D2;&#x4EF6;</h6>
+<p>Email Extension</p>
+</li>
+</ul>
+</li>
+<li><h4 id="&#x96C6;&#x6210;kubernetes&#x8BBE;&#x7F6E;">&#x96C6;&#x6210;Kubernetes&#x8BBE;&#x7F6E;</h4>
+<ul>
+<li><p>Jenkins&#x670D;&#x52A1;&#x542F;&#x52A8;&#x540E;&#x914D;&#x7F6E;&#x597D;&#x767B;&#x5F55;&#x7528;&#x6237;&#x5BC6;&#x7801;&#x540E;&#xFF0C;&#x4E0B;&#x4E00;&#x6B65;&#x5C31;&#x662F;&#x5728; Jenkins &#x4E2D;&#x8BBE;&#x7F6E;&#x96C6;&#x6210;kubernetes&#x4E91;&#x7684;&#x914D;&#x7F6E;&#xFF1A;</p>
+<ol>
+<li><p>&#x8FDB;&#x5165; Jenkins UI &#x754C;&#x9762;&#xFF0C;&#x70B9;&#x51FB; &#x7CFB;&#x7EDF;&#x7BA1;&#x7406; &#x2192; &#x7CFB;&#x7EDF;&#x8BBE;&#x7F6E;&#xFF1B;</p>
+</li>
+<li><p>&#x8FDB;&#x5165;&#x7BA1;&#x7406;&#x754C;&#x9762;&#x540E;&#x67E5;&#x627E; &#x300E;&#x4E91;&#x300F;&#xFF08;&#x4E00;&#x822C;&#x5728;&#x4E0B;&#x9762;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x70B9;&#x51FB; &#x300E;&#x65B0;&#x589E;&#x4E00;&#x4E2A;&#x4E91;&#x300F;&#xFF0C;&#x9009;&#x62E9; kubernetes &#x7C7B;&#x578B;&#xFF1B;</p>
+</li>
+<li><p>&#x5982;&#x4E0B;&#x8FD9;&#x4E9B;&#x662F;&#x5FC5;&#x586B;&#x7684;&#x53C2;&#x6570;&#xFF1A;</p>
+<p>Name &#x81EA;&#x5B9A;&#x4E49;&#xFF0C; &#x9ED8;&#x8BA4;&#x662F; kubernetes&#xFF1B;</p>
+<p>Kubernetes URL <a href="https://kubernetes.default" target="_blank">https://kubernetes.default</a> -&#x4E00;&#x822C;&#x662F;&#x4ECE; service account &#x81EA;&#x52A8;&#x914D;&#x7F6E;&#xFF1B;</p>
+<p>Kubernetes Namespace &#x4E00;&#x822C;&#x662F; default  &#x9664;&#x975E;&#x8981;&#x5728;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4; &#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x8981;&#x52A8;&#xFF1B;</p>
+<p>Credentials &#x5982;&#x679C;&#x662F;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x8BBE;&#x7F6E;&#x7684;&#x51ED;&#x8BC1;&#x5219;&#x7A7A;&#x7740;&#x4E0D;&#x914D;&#x7F6E;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x7B2C;&#x4E8C;&#x79CD;&#x5219;&#x9009;&#x62E9;&#x4E0A;&#x4E00;&#x6B65;&#x521B;&#x5EFA;&#x7684;&#x51ED;&#x8BC1;&#xFF1B;</p>
+<p>Jenkins URL http://<your_jenkins_hostname>:8080&#xFF1B;</your_jenkins_hostname></p>
+<p>Jenkins tunnel <your_jenkins_hostname>:5555 - &#x7528;&#x6765;&#x548C; Jenkins &#x542F;&#x52A8;&#x7684; agent &#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#x7684;&#x7AEF;&#x53E3;&#xFF1B;</your_jenkins_hostname></p>
+<p><img src="D:\gitbook\cicd_project\install\1557388941452.png" alt="1557388941452"></p>
+</li>
+<li><p>&#x70B9;&#x51FB;test connection&#x6309;&#x94AE;&#xFF0C;&#x9A8C;&#x8BC1;&#x8FDE;&#x63A5;&#x3002;</p>
+</li>
+</ol>
+</li>
+<li><p>&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B9A;&#x4E49;&#x4E00;&#x4E9B; pod &#x5B9E;&#x73B0;Jenkins master &#x8BBF;&#x95EE; K8s &#x96C6;&#x7FA4;&#x4E86;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x4E2A; pod &#x4E2D;&#x6267;&#x884C;&#x4E00;&#x4E9B;&#x6784;&#x5EFA;&#x5DE5;&#x4F5C;&#x3002;&#x6BCF;&#x4E00;&#x4E2A; Jenkins &#x8282;&#x70B9;&#x90FD;&#x662F;&#x4F5C;&#x4E3A; K8s pod &#x6765;&#x542F;&#x52A8;&#x7684;&#x3002;&#x8FD9;&#x4E2A; pod &#x91CC;&#x9762;&#x7ECF;&#x5E38;&#x4F1A;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x7684; JNLP &#x5BB9;&#x5668;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;pod &#x6A21;&#x677F;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x5BB9;&#x5668;&#x3002;&#x73B0;&#x5728;&#x6709;&#x81F3;&#x5C11;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x6765;&#x5B9A;&#x4E49;pod template&#x3002;</p>
+</li>
+<li><p><em>&#x901A;&#x8FC7; Jenkins UI &#x914D;&#x7F6E;&#x4E00;&#x4E2A; pod template</em> &#x548C; <em>&#x7528; jenkinsfile &#x6765;&#x5B9E;&#x73B0;&#x76F8;&#x540C;&#x7684;&#x529F;&#x80FD;</em></p>
+</li>
+</ul>
+</li>
+<li><h4 id="eos&#x9879;&#x76EE;&#x6784;&#x5EFA;&#x4F7F;&#x7528;&#x7684;&#x955C;&#x50CF;&#x51C6;&#x5907;">eos&#x9879;&#x76EE;&#x6784;&#x5EFA;&#x4F7F;&#x7528;&#x7684;&#x955C;&#x50CF;&#x51C6;&#x5907;</h4>
+<ul>
+<li><h6 id="jenkins&#x4F7F;&#x7528;pipeline&#x8C03;&#x5EA6;&#x5728;kubernetes&#x521B;&#x5EFA;jenkins-slave&#x7684;pod&#xFF0C;pod&#x91CC;&#x8FD0;&#x884C;&#x4E09;&#x4E2A;&#x5BB9;&#x5668;&#x5F00;&#x5C55;&#x6784;&#x5EFA;&#x5DE5;&#x4F5C;&#xFF0C;&#x5BB9;&#x5668;&#x955C;&#x50CF;&#x51C6;&#x5907;&#x5982;&#x4E0B;&#xFF1A;">Jenkins&#x4F7F;&#x7528;pipeline&#x8C03;&#x5EA6;&#x5728;Kubernetes&#x521B;&#x5EFA;jenkins slave&#x7684;pod&#xFF0C;pod&#x91CC;&#x8FD0;&#x884C;&#x4E09;&#x4E2A;&#x5BB9;&#x5668;&#x5F00;&#x5C55;&#x6784;&#x5EFA;&#x5DE5;&#x4F5C;&#xFF0C;&#x5BB9;&#x5668;&#x955C;&#x50CF;&#x51C6;&#x5907;&#x5982;&#x4E0B;&#xFF1A;</h6>
+<ol>
+<li><p>jenkins slave&#x955C;&#x50CF;jnlp-slave&#xFF1B;</p>
+<p>&#x4F7F;&#x7528;&#x5B98;&#x65B9;&#x955C;&#x50CF;&#xFF0C;&#x4E0D;&#x505A;&#x4FEE;&#x6539;&#x3002;</p>
+</li>
+<li><p>&#x5236;&#x4F5C;&#x7528;&#x4E8E;maven&#x6253;&#x5305;&#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;maven&#xFF1A;</p>
+<p>eos&#x9879;&#x76EE;maven&#x4F7F;&#x7528;&#x672C;&#x5730;&#x90E8;&#x7F72;&#x7684;&#x79C1;&#x6709;&#x4ED3;&#x5E93;Nexus&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x628A;&#x5B98;&#x65B9;maven&#x955C;&#x50CF;&#x52A0;&#x5165;&#x672C;&#x5730;Nexus&#x4ED3;&#x5E93;&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#xFF0C;&#x5B9A;&#x5236;&#x9002;&#x5408;&#x672C;&#x5730;&#x4F7F;&#x7528;&#x7684;maven&#x955C;&#x50CF;&#x3002;&#x5236;&#x4F5C;&#x955C;&#x50CF;&#x7684;Dockerfile&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><code>FROM reg.ecs.local/eos/maven:3-jdk-8</code></p>
+<p><code>COPY settings.xml /root/.m2/</code></p>
+<p><code>ENTRYPOINT [&quot;/usr/local/bin/mvn-entrypoint.sh&quot;]</code></p>
+<p><code>CMD [&quot;mvn&quot;]</code></p>
+</li>
+<li><p>&#x5236;&#x4F5C;Docker&#x955C;&#x50CF;&#xFF0C;&#x7528;&#x4E8E;eos&#x5FAE;&#x670D;&#x52A1;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x548C;&#x53D1;&#x5E03;&#x670D;&#x52A1;&#x5230;Kubernetes&#x96C6;&#x7FA4;&#xFF1A;</p>
+<p>&#x9700;&#x8981; Docker &#x5BA2;&#x6237;&#x7AEF;&#x4F7F;&#x7528; Docker API &#x8FDB;&#x884C;docker&#x955C;&#x50CF;&#x7684;&#x6784;&#x5EFA;&#x548C;&#x53D1;&#x5E03;&#x5230;&#x672C;&#x5730;&#x79C1;&#x6709;harbo&#x955C;&#x50CF;&#x4ED3;&#x5E93;&#xFF0C;&#x53E6;&#x5916;Kubernetes&#x96C6;&#x7FA4;&#x4F7F;&#x7528;Rancher&#x8FDB;&#x884C;&#x90E8;&#x7F72;&#x548C;&#x7BA1;&#x7406;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x4F18;&#x9009;&#x96C6;&#x6210;Rancher CLI&#x8FDB;&#x884C;&#x64CD;&#x4F5C;Kubernetes&#x53D1;&#x5E03;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x907F;&#x514D;&#x51FA;&#x73B0;&#x672A;&#x77E5;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x628A;&#x672C;&#x5730;&#x914D;&#x7F6E;&#x597D;&#x7684;harbor&#x51ED;&#x8BC1;&#x3001;Rancher CLI&#x51ED;&#x8BC1;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x3001;kubectl&#x6587;&#x4EF6;&#x96C6;&#x6210;&#x5230;Docker&#x5B98;&#x65B9;&#x955C;&#x50CF;&#x91CC;&#xFF0C;&#x7528;&#x4E8E;&#x6784;&#x5EFA;&#x65F6;&#x4F7F;&#x7528;&#x3002;</p>
+<p>Dockerfile&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><code>FROM docker:18.09</code></p>
+<p><code>ADD certs.d/reg.ecs.local/ca.crt /etc/docker/certs.d/reg.ecs.local/ca.crt</code></p>
+<p><code>ADD rancher-v2.2.0/rancher /etc/rancher-v2.2.0/rancher</code></p>
+<p><code>ADD cli2.json /etc/rancher-v2.2.0/cli2.json</code></p>
+<p><code>COPY kubectl /usr/local/bin/kubectl</code></p>
+<p><code>RUN chmod +x /usr/local/bin/kubectl</code></p>
+<p><code>ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]</code></p>
+<p><code>CMD [&quot;sh&quot;]</code></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li></li>
+<li><h4 id="jenkins-plus--kubernetsplugin">Jenkins plus : kubernets_plugin</h4>
+</li>
+</ul>
+<p>&#x200B;          &#x7F16;&#x5199;yaml&#x6587;&#x4EF6;&#x5EFA;&#x7ACB;ServieAccount&#x7528;&#x4E8E;jenkins&#x8BBF;&#x95EE;kubernetes&#x96C6;&#x7FA4;: jenkins-rbac.yaml</p>
+<ul>
+<li>&#x6D41;&#x6C34;&#x7EBF;&#x8BBE;&#x8BA1;</li>
+<li><ul>
+<li>&#x7F16;&#x8BD1;&#x548C;&#x5355;&#x6D4B;&#x2014;&#x2014;&#x6A21;&#x5757;&#x6D4B;&#x8BD5;&#x2014;&#x2014;&#x7CFB;&#x7EDF;&#x6D4B;&#x8BD5;&#x2014;&#x2014;&#x9884;&#x4E0A;&#x7EBF;&#x2014;&#x2014;&#x751F;&#x4EA7;/&#x7070;&#x5EA6;&#x2014;&#x2014;&#x751F;&#x4EA7;/&#x5168;&#x91CF;
+| &#x7F16;&#x8BD1;&#x548C;&#x5355;&#x6D4B; | &#x6A21;&#x5757;&#x6D4B;&#x8BD5; | &#x7CFB;&#x7EDF;&#x6D4B;&#x8BD5; | &#x9884;&#x4E0A;&#x7EBF; | &#x751F;&#x4EA7;/&#x7070;&#x5EA6; | &#x751F;&#x4EA7;/&#x5168;&#x91CF; |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| &#x591A;&#x4E2A;stage&#x662F;&#x4E32;&#x884C;&#x6267;&#x884C; |  | &#x6267;&#x884C;&#x4F5C;&#x4E1A;&#xFF08;job&#xFF09; | &#x8D28;&#x91CF;&#x95E8;&#xFF08;&#x901A;&#x8FC7;&#x6807;&#x51C6;&#xFF09;&#x4EBA;&#x5DE5;&#x5E72;&#x9884; | &#x51B3;&#x7B56;&#x70B9;&#xFF0C;&#x4EBA;&#x5DE5;&#x5E72;&#x9884; |  |
+| &#x524D;&#x4E00;&#x4E2A;stage&#x6210;&#x529F;&#x540E;&#x81EA;&#x52A8;&#x89E6;&#x53D1; |  | stage&#x91CC;&#x7684;&#x591A;&#x4E2A;job&#x4E32;/&#x5E76;&#x6267;&#x884C; | pass/fail&#x5224;&#x5B9A;&#x6807;&#x51C6; | &#x914D;&#x7F6E;&#x4EBA;&#x5DE5;&#x51B3;&#x7B56;&#xFF0C;&#x4E00;&#x952E;Approve&#x540E;&#x6D41;&#x6C34;&#x7EBF;&#x81EA;&#x52A8;&#x6267;&#x884C; |  |
+| &#x4E5F;&#x53EF;&#x4EE5;&#x8BBE;&#x8BA1;&#x624B;&#x5DE5;&#x89E6;&#x53D1; |  | stage&#x91CC;&#x7684;&#x591A;&#x4E2A;job&#x5B9A;&#x65F6;&#x6267;&#x884C; | &#x6D4B;&#x8BD5;&#x901A;&#x8FC7;&#x7387;&gt;x% | &#x4E5F;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x524D;&#x5E8F;stage&#x6210;&#x529F;&#x540E;&#x81EA;&#x52A8;&#x89E6;&#x53D1;&#x6267;&#x884C; |  |
+|  |  | &#x81EA;&#x52A8;&#x5224;&#x65AD;&#x6216;&#x4EBA;&#x5DE5;&#x6807;&#x8BB0;pass/fail | &#x4EE3;&#x7801;&#x8986;&#x76D6;&#x7387;&gt;x% |  |  |
+|  |  | job fail&gt;stage fail |  |  |  |</li>
+</ul>
+</li>
+<li><h4 id="&#x6D41;&#x6C34;&#x7EBF;&#x90E8;&#x7F72;&#x8BBE;&#x8BA1;&#xFF1A;">&#x6D41;&#x6C34;&#x7EBF;&#x90E8;&#x7F72;&#x8BBE;&#x8BA1;&#xFF1A;</h4>
+</li>
+<li><h4 id="&#x63D0;&#x4EA4;&#x9636;&#x6BB5;&#x2014;&#x2014;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;&#x9636;&#x6BB5;&#x2014;&#x2014;prd&#x9636;&#x6BB5;">&#x63D0;&#x4EA4;&#x9636;&#x6BB5;&#x2014;&#x2014;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;&#x9636;&#x6BB5;&#x2014;&#x2014;PRD&#x9636;&#x6BB5;</h4>
+</li>
+<li><h4 id="-&#x4EE3;&#x7801;&#x8BBE;&#x5B9A;develop&#x3001;master&#x4E24;&#x4E2A;&#x4E3B;&#x5206;&#x652F;">* ##### &#x4EE3;&#x7801;&#x8BBE;&#x5B9A;develop&#x3001;master&#x4E24;&#x4E2A;&#x4E3B;&#x5206;&#x652F;</h4>
+</li>
+<li><h4 id="-&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53EA;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;develop&#x5206;&#x652F;&#xFF0C;&#x9879;&#x76EE;&#x4E3B;&#x7BA1;&#x8D1F;&#x8D23;&#x5408;&#x5E76;&#x4EE3;&#x7801;&#x5230;master&#x5206;&#x652F;&#xFF0C;&#x57FA;&#x4E8E;master&#x5206;&#x652F;&#x8FDB;&#x884C;&#x521B;&#x5EFA;tag&#x3001;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;&#x3001;&#x90E8;&#x7F72;&#x3002;">* ##### &#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53EA;&#x5141;&#x8BB8;&#x63D0;&#x4EA4;develop&#x5206;&#x652F;&#xFF0C;&#x9879;&#x76EE;&#x4E3B;&#x7BA1;&#x8D1F;&#x8D23;&#x5408;&#x5E76;&#x4EE3;&#x7801;&#x5230;master&#x5206;&#x652F;&#xFF0C;&#x57FA;&#x4E8E;master&#x5206;&#x652F;&#x8FDB;&#x884C;&#x521B;&#x5EFA;tag&#x3001;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;&#x3001;&#x90E8;&#x7F72;&#x3002;</h4>
+</li>
+<li><h4 id=""> </h4>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../chapter1/Readme.html" class="navigation navigation-prev " aria-label="Previous page: Installation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="rook_ceph.html" class="navigation navigation-next " aria-label="Next page: Rook-Deph Configuration">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Jenkins Configuration","level":"1.2.1","depth":2,"next":{"title":"Rook-Deph Configuration","level":"1.2.2","depth":2,"path":"install/rook_ceph.md","ref":"install/rook_ceph.md","articles":[]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"chapter1/Readme.md","ref":"chapter1/Readme.md","articles":[{"title":"Jenkins Configuration","level":"1.2.1","depth":2,"path":"install/jenkins.md","ref":"install/jenkins.md","articles":[]},{"title":"Rook-Deph Configuration","level":"1.2.2","depth":2,"path":"install/rook_ceph.md","ref":"install/rook_ceph.md","articles":[]},{"title":"Section1.1","level":"1.2.3","depth":2,"path":"chapter1/section1.1.md","ref":"chapter1/section1.1.md","articles":[]},{"title":"Deploy Rook","level":"1.2.4","depth":2,"path":"rook/rook1.md","ref":"rook/rook1.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"install/jenkins.md","mtime":"2019-05-09T11:06:40.351Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-10T02:46:33.930Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
